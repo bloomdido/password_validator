@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["canthes@bloomdido.com"]
   s.homepage    = "https://github.com/bloomdido/password_validator"
   s.summary     = "An ActiveModel validator that consolidates multiple password validations."
-  s.license     = ["MIT"]
+  s.licenses    = ["MIT"]
 
   s.test_files = Dir["test/**/*"]
 
