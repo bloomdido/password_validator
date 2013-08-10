@@ -18,7 +18,8 @@ module ActiveModel
         @password = record.password
         @password_confirmation = record.password_confirmation
 
-        # return if record.persisted? && @password.blank?
+        # skip checks if record already saved and password is not being updated
+        return if record.persisted? && @password.blank?
 
         case
         when blank?
