@@ -18,11 +18,6 @@ module ActiveModel
         @password = record.password
         @password_confirmation = record.password_confirmation
 
-        default_options
-                
-        # skip checks if record already saved and password is not being updated
-        return if record.persisted? && @password.blank?
-
         case
         when blank?
           record.errors.add(:password, "can't be blank")
@@ -33,12 +28,6 @@ module ActiveModel
         when not_confirmed?
           record.errors.add(:password_confirmation, "doesn't match password")
         end
-      end
-
-      def default_options
-        options[:presence] = true unless options.has_key?(:presence)
-        options[:common] = true unless options.has_key?(:common)
-        options[:confirmation] = true unless options.has_key?(:confirmation)
       end
 
       def blank?
