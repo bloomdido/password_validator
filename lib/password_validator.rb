@@ -18,6 +18,8 @@ module ActiveModel
         @password = record.password
         @password_confirmation = record.password_confirmation
 
+        default_options
+                
         # skip checks if record already saved and password is not being updated
         return if record.persisted? && @password.blank?
 
@@ -33,8 +35,14 @@ module ActiveModel
         end
       end
 
+      def default_options
+        options[:presence] = true unless options.has_key?(:presence)
+        options[:common] = true unless options.has_key?(:common)
+        options[:confirmation] = true unless options.has_key?(:confirmation)
+      end
+
       def blank?
-        @password.blank?
+        options[:presence] && @password.blank?
       end
 
       def too_short?
@@ -43,11 +51,12 @@ module ActiveModel
 
       def too_common?
         # todo: improve this
-        %w(password qwerty abc123 abcdef 123456 111111).include? @password
+        common_passwords = %w(password qwerty abc123 abcdef 123456 111111)
+        options[:common] && common_passwords.include?(@password)
       end
 
       def not_confirmed?
-        @password_confirmation != @password
+        options[:confirmation] && @password_confirmation != @password
       end
     end
   end
