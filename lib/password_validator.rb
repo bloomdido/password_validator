@@ -18,6 +18,9 @@ module ActiveModel
         @password = record.password
         @password_confirmation = record.password_confirmation
 
+        # skip for blank passwords unless checking for presence
+        return if password.blank? && !options[:presence]
+
         case
         when blank?
           record.errors.add(:password, "can't be blank")
@@ -31,7 +34,7 @@ module ActiveModel
       end
 
       def blank?
-        options[:presence] && @password.blank?
+        @password.blank?
       end
 
       def too_short?
