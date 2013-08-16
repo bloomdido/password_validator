@@ -19,7 +19,7 @@ module ActiveModel
         @password_confirmation = record.password_confirmation
 
         # skip for blank passwords unless checking for presence
-        return if password.blank? && !options[:presence]
+        return if @password.blank? && !options[:presence]
 
         case
         when blank?
