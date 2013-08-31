@@ -15,8 +15,8 @@ module ActiveModel
       # todo: use I18n for errors
 
       def validate(record)
-        @password = record.password
-        @password_confirmation = record.password_confirmation
+        @password = record.try(:password)
+        @password_confirmation = record.try(:password_confirmation)
 
         case
         when blank?
