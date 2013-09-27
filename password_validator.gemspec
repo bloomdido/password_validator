@@ -13,7 +13,9 @@ Gem::Specification.new do |s|
   s.summary     = "An ActiveModel validator that consolidates multiple password validations."
   s.licenses    = ["MIT"]
 
+  s.files = Dir["lib/*.rb"]
   s.test_files = Dir["test/**/*"]
+  s.require_paths = ["lib"]
 
-  s.add_dependency "activemodel"
+  s.add_runtime_dependency "activemodel"
 end
