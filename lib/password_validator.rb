@@ -20,7 +20,7 @@ module ActiveModel
 
         case
         when blank?
-          record.errors.add(:password, "can't be blank") unless options[:allow_blank]
+          record.errors.add(:password, "can't be blank") unless record.persisted?
         when too_short?
           record.errors.add(:password, "must be a minimum of #{options[:min_length]} characters in length")
         when too_common?
